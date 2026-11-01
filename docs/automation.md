@@ -14,3 +14,5 @@ For submissions, generate and persist your request UUID with your job record bef
 Use `mc api GET /v1/capabilities --json` to verify compatibility before requiring newer operations. The raw API command only accepts `/v1/` paths and retains all authentication, timeout, redirect and output rules. Raw POST requests to task/handoff collections receive the same durable persistence treatment.
 
 Avoid high-frequency polling. Fetch one scoped project on demand. Do not place provider credentials, runtime secret values, access tokens or inspection output in public CI artifacts.
+
+Use `mc home --json` for a bounded read-only action summary. Evaluate `data.version` before consuming fields. It does not replay requests, and no suggested action overrides authorization or uncertainty. Bare `mc` now opens Home rather than help; automation that wants command help must pass `--help`.
