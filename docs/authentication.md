@@ -11,3 +11,7 @@ Credentials live in `~/.config/mission-control/credentials.json`, with mode 0600
 Credentials are bound to their API origin. Changing `--endpoint` cannot send a stored token to a different origin. `MC_TOKEN`, when explicitly supplied, is used with the selected origin. Only HTTPS origins are accepted, except localhost for development. Redirects are never followed.
 
 `mc auth status` verifies the remote token. `mc auth logout` revokes the remote device before removing its local token. If revocation fails, the credential remains so you can retry. An environment token cannot be removed from its parent process: remove the CI secret or unset it after revocation. A 401 requires a new login; a 403 requires an appropriate project or organization role. Logging in does not elevate your role.
+
+New installations default to `https://jsl.topkey.io`. Existing configured endpoints remain in effect. Stored credentials stay bound to their original origin; to explicitly move an existing CLI to JSL, sign in with `mc login --endpoint https://jsl.topkey.io`. Do not copy tokens or edit the credential file to bypass origin binding.
+
+Home uses the same authenticated project read access as `mc runs list`. A missing login or project scope produces the existing setup error; `mc --help` remains available without authentication. Home never elevates roles or submits work.

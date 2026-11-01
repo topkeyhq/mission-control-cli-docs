@@ -34,3 +34,7 @@ For automation, use `mc auth login --pair-stdin` or `--token-stdin`, or inject `
 [Authentication](docs/authentication.md) · [Command reference](docs/commands.md) · [Workflows](docs/workflows.md) · [Automation](docs/automation.md) · [Troubleshooting and compatibility](docs/compatibility.md)
 
 [Independent sign-in](docs/independent-signin.md) · [Independent workers](docs/workers.md) · [Cross-client migration coverage](docs/migration-parity.md)
+
+## Home daily briefing (0.6.0)
+
+After configuring a factory and project, run `mc` or `mc home` for read-only next steps. Use `mc home --json` for versioned automation output, `mc insights` for metrics, and `mc --help` for help. Home distinguishes uncertain receipts and reported completion; it never starts or retries work.
