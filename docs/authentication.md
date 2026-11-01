@@ -1,10 +1,10 @@
 # Authentication
 
-Run `mc login` for a hidden pairing-code prompt against production. `mc whoami` checks the stored identity and `mc logout` revokes it. `mc update` uses your GitHub login to download private release assets; that is separate from API authentication.
+Run `mc login` (or `mc login --browser` in a non-interactive terminal) for independent Google sign-in. No Mac pairing is required. `mc whoami` checks the stored identity and `mc logout` revokes it. `mc update` uses your GitHub login for private release downloads; that is separate from API authentication.
 
-Each engineer pairs their own device using an authorized Mission Control session. The CLI never imports another engineer's identity. Obtain a pairing code through your existing app's device pairing flow, then pipe it to `mc auth login --pair-stdin`. A pairing code is exchanged at `/v1/devices/pair`; the issued token is checked with `/v1/status` before saving. If your organization uses Google onboarding, finish onboarding in Mission Control first. Interactive browser OAuth is not implemented in this initial CLI.
+The default `observe` grant permits reads. Choose `--scope operate` for tasks, handoffs and session controls, or `--scope full` for configuration and worker registration. Grants expire after 30 days and never exceed your account's roles. Follow [independent sign-in](independent-signin.md) to verify your own GitHub membership when requested.
 
-`mc auth login --token-stdin` accepts an independently issued device token. Neither mode accepts a secret as an argument. Both expect exactly 64 lowercase hexadecimal characters. Use a password manager's stdout command or your CI secret store, with shell tracing disabled.
+Existing device pairing remains supported with `mc auth login --pair-stdin`. `mc auth login --token-stdin` accepts an independently issued credential. Legacy tokens are 64 lowercase hexadecimal characters; expiring client grants have the `mcg1.` prefix. Neither accepts secrets in command arguments. Machine `mcw1.` credentials are managed separately by [the worker runner](workers.md).
 
 Credentials live in `~/.config/mission-control/credentials.json`, with mode 0600. The containing directory is created with mode 0700. No Keychain API is called. This avoids repeated Keychain prompts but means anyone with access to your OS account can read the token. Use your OS account and disk protections. `MC_CONFIG_DIR` relocates local state; keep it private and outside repositories. POSIX permissions are tested on macOS; Windows ACL hardening has not been verified.
 

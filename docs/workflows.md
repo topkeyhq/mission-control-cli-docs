@@ -31,7 +31,7 @@ Read `mc schedules list`, `mc runtime show`, and `mc schedules conflicts` first.
 
 ## Inspect configuration safely
 
-Use `mc factories show --json`, `mc health --json`, and `mc execution show --json` before changes. Use revision-aware reads and writes for records. Scope commands to one project; this CLI does not continuously scan or poll all projects. Cached Insights depends on the canonical API capabilities published by your deployed version; do not infer their availability from CLI installation alone.
+Use `mc factories show --json`, `mc health --json`, and `mc execution show --json` before changes. Use revision-aware reads and writes for records. Scope commands to one project; this CLI does not continuously scan or poll all projects. `mc metrics show` reads shared dispatch counts; `mc events list --since CURSOR --checkpoint HASH` resumes receipt history. These do not reproduce native historical provider analytics. Check deployed capabilities before using a newly added command.
 
 ## Steer an existing run
 

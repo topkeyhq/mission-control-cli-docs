@@ -9,3 +9,15 @@ Separate installed-package integration tests use real HTTP, the canonical Worker
 Bellman’s organization-owned announcement workflow posted v0.2.1 in the shared release channel. A duplicate announcement-job rerun succeeded through the existing-receipt path, with one unchanged production receipt and no second post. [Release workflow evidence](https://github.com/topkeyhq/just-ship-league-mission-control-cli/actions/runs/41265570612). Each internal project opts into the shared organization bot/channel through Organization → Projects.
 
 Linux/macOS CI tests run on Node 22 and 24. Windows, Omarchy, fresh organization-admin onboarding and every capability-parity scenario remain outside this verification.
+
+## Independent access and workers — November 1, 2026
+
+Later source verification completed independent Google browser login, scoped-grant
+rejection and revocation, live read-only Codex execution in a private verification
+project, checkpoint resume, worker revocation and hosted-kind lease-loss fencing.
+These changes have not been published as a new package by this verification.
+See the canonical [migration record](https://github.com/topkeyhq/just-ship-league-mission-control-web/blob/main/docs/SQUAD-MIGRATION.md).
+
+The parity follow-up ran all 15 CLI tests with the updated canonical API source;
+no cases were skipped. The guides now describe browser login, workers, metrics
+and checkpoints, and completion includes their commands. See [migration parity](migration-parity.md).

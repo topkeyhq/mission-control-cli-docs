@@ -17,7 +17,7 @@ mc login
 mc whoami
 ```
 
-`mc login` prompts for a pairing code from Mission Control Mac → Cloud & devices. Input is hidden. The default API is production League Cloud. Each login creates an independently revocable CLI device; no Keychain prompts. Use `mc logout` to revoke it.
+`mc login` opens independent Google browser sign-in; no running Mac app or pairing code is required. Observation is the default scope. Use `mc login --browser --scope operate` for task/session actions, or `--scope full` for administration within your existing roles. The default API is production League Cloud. Each login creates an independently revocable CLI device; no Keychain prompts. Use `mc logout` to revoke it.
 
 ```sh
 mc factories list
@@ -32,3 +32,5 @@ For automation, use `mc auth login --pair-stdin` or `--token-stdin`, or inject `
 `mc update` downloads the latest stable GitHub Release, verifies its checksum, and installs it. With mise, install from the directory whose Node version you use, and run `mise reshim` if needed. Source/releases are private; [documentation is public](https://github.com/topkeyhq/mission-control-cli-docs). See [Bellman release procedure](docs/releases.md).
 
 [Authentication](docs/authentication.md) · [Command reference](docs/commands.md) · [Workflows](docs/workflows.md) · [Automation](docs/automation.md) · [Troubleshooting and compatibility](docs/compatibility.md)
+
+[Independent sign-in](docs/independent-signin.md) · [Independent workers](docs/workers.md) · [Cross-client migration coverage](docs/migration-parity.md)
