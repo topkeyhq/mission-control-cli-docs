@@ -1,5 +1,7 @@
 # Authentication
 
+Run `mc login` for a hidden pairing-code prompt against production. `mc whoami` checks the stored identity and `mc logout` revokes it. `mc update` uses your GitHub login to download private release assets; that is separate from API authentication.
+
 Each engineer pairs their own device using an authorized Mission Control session. The CLI never imports another engineer's identity. Obtain a pairing code through your existing app's device pairing flow, then pipe it to `mc auth login --pair-stdin`. A pairing code is exchanged at `/v1/devices/pair`; the issued token is checked with `/v1/status` before saving. If your organization uses Google onboarding, finish onboarding in Mission Control first. Interactive browser OAuth is not implemented in this initial CLI.
 
 `mc auth login --token-stdin` accepts an independently issued device token. Neither mode accepts a secret as an argument. Both expect exactly 64 lowercase hexadecimal characters. Use a password manager's stdout command or your CI secret store, with shell tracing disabled.

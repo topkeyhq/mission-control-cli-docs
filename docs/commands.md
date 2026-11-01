@@ -2,6 +2,8 @@
 
 Run `mc --help` for the complete discoverable command list. `mission-control` is an alias for `mc`.
 
+`mc login`, `mc whoami`, and `mc logout` are convenient authentication commands. `mc update` installs the latest checksummed stable release. Maintainers use `mc release --dry-run` and `mc release --bump patch|minor|major|auto` in a clean main checkout.
+
 Global options: `--endpoint HTTPS_ORIGIN`, `--factory UUID`, `--project owner/repo`, `--id UUID`, `--request-id UUID`, `--file payload.json` (or `-` for stdin), and `--json`. Store scope with `mc config set --factory UUID --project owner/repo`; inspect it with `mc config show`. Arguments override stored defaults. `MC_ENDPOINT` overrides the stored endpoint.
 
 | Commands | Scope and purpose |
