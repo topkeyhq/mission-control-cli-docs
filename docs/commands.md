@@ -15,6 +15,9 @@ Global options: `--endpoint HTTPS_ORIGIN`, `--factory UUID`, `--project owner/re
 | `records list`, `records set` | Revision-bound synchronized records |
 | `runtime show`, `runtime set` | Project bot runtime |
 | `schedules list`, `schedules set`, `schedules delete`, `schedules conflicts` | Project schedules and provider conflicts |
+| `events list --since CURSOR --checkpoint HASH`, `metrics show` | Restore-safe receipt history and shared receipt counts |
+| `worker register`, `worker run`, `worker recover` | Host-local registration, execution and saved-result reconciliation; see [workers](workers.md) |
+| `workers list`, `workers revoke --id UUID` | Project worker roster and revocation |
 | `runs list`, `runs inspect --id UUID` | Execution history and bounded inspection |
 | `tasks list`, `tasks submit` | Native project tasks |
 | `handoffs submit`, `handoffs show --id UUID` | Explicit bot requests and durable receipts |
@@ -35,3 +38,9 @@ Mutation payloads are read from `--file`. They follow the server's versioned API
 Exit codes: 0 success; 2 usage/local input or other HTTP rejection; 3 unauthenticated; 4 forbidden; 5 not found; 6 conflict; 7 network/timeout with potentially unknown acceptance; 8 rate limited; 9 upstream/server/invalid JSON response. Error bodies are not echoed because they may contain secrets.
 
 Completion: `mc completion bash > ~/.mission-control-completion.bash`, then source that file from `.bashrc`. For zsh, save `mc completion zsh` as `_mc` in a directory on `fpath`, then run `compinit`. Completion currently covers top-level commands.
+
+Resume receipt history with both returned values: `events list --since CURSOR --checkpoint HASH`.
+A 409 means the acknowledged history changed (for example after restore); rebuild
+from `--since 0`. Preserve local drafts and never replay mutation requests merely
+to rebuild observation history. Numeric-only cursors remain compatible but cannot
+detect sequence reuse after a database restore.

@@ -17,6 +17,6 @@ mc login
 mc whoami
 ```
 
-Run `mc update` for future releases. It downloads the latest stable release using `gh`, verifies the SHA-256 checksum, and installs it without lifecycle scripts. GitHub access and Mission Control login are separate identities: GitHub authorizes installation; your own paired Mission Control device authorizes API operations.
+Run `mc update` for future releases. It downloads the latest stable release using `gh`, verifies the SHA-256 checksum, and installs it without lifecycle scripts. GitHub access and Mission Control login are separate identities: GitHub authorizes installation; your own independently authenticated Mission Control credential authorizes API operations.
 
 Organization → Projects classifies this repository as internal tooling and enables version announcements. Organization settings control Bellman’s master switch and shared Slack channel. The announcement job uses GitHub OIDC and the shared SLACK_BOT_TOKEN Actions secret. The receipt service claims repository/version before posting; reruns cannot resend an uncertain or already posted announcement. No agent runtime or bot handoff is involved.
