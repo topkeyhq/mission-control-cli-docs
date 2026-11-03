@@ -63,3 +63,15 @@ detect sequence reuse after a database restore.
 `mc insights` reads the same metrics as `mc metrics show`; both remain supported. Configure with `mc config`, inspect occasional history with `mc insights`, and use Home for next steps.
 
 Session message receipts can report `queued`: Conductor accepted the message but is waiting to deliver it, including during workspace/agent startup. Both normal and `--json` output preserve this state. It is not task completion. Use `runs inspect` for current activity and `operations show --id <requestID>` for the original submission receipt; replay never sends a queued message again. Existing CLI versions display this additive state without an upgrade.
+
+## Personal merge queues
+
+Each signed-in engineer has their own queue for each repository. The same account sees the same order on Mac, Web, iPhone and CLI. Select a factory and project, then run:
+
+```sh
+mc queue add --prs 481,482,483
+mc queue status
+mc queue land --bot BOT
+```
+
+Use `mc queue status --json` for machine-readable observations. On the landing command, `--owner LOGIN` selects the GitHub merge identity. Your signed-in Mission Control account still owns the queue. GitHub confirms each merge before the coordinator advances.
