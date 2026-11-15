@@ -13,6 +13,7 @@ Global options: `--endpoint HTTPS_ORIGIN`, `--factory UUID`, `--project owner/re
 | `bots list`, `bots colors`, `ledger list` | Factory bot roster, synchronized profile colors and activity |
 | `bots color --bot ID --color '#RRGGBB'` | Set one profile's shared card/phase accent; use an exact record key from `bots colors` when IDs are ambiguous |
 | `execution show`, `execution set`, `execution verify` | Runtime connection configuration and verification |
+| `policy show`, `policy set --file policy.json` | Read or update your personal execution policy for this project |
 | `records list`, `records set` | Revision-bound synchronized records |
 | `runtime show`, `runtime set` | Project bot runtime |
 | `schedules list`, `schedules set`, `schedules delete`, `schedules conflicts` | Project schedules and provider conflicts |
@@ -20,6 +21,7 @@ Global options: `--endpoint HTTPS_ORIGIN`, `--factory UUID`, `--project owner/re
 | `worker register`, `worker run`, `worker recover` | Host-local registration, execution and saved-result reconciliation; see [workers](workers.md) |
 | `workers list`, `workers revoke --id UUID` | Project worker roster and revocation |
 | `runs list`, `runs inspect --id UUID` | Execution history and bounded inspection |
+| `runs attention --id RUN_UUID` | Read the attention decision for a paired-worker run |
 | `tasks list`, `tasks submit` | Native project tasks |
 | `handoffs submit`, `handoffs show --id UUID` | One-time bot runs or configured pipeline kickoffs, with durable receipts |
 | `sessions message`, `sessions cancel`, `sessions archive`, `sessions unarchive` | Server-owned run controls (`--id RUN_UUID`); use `--request-id` for a stable operation UUID |
@@ -63,3 +65,11 @@ detect sequence reuse after a database restore.
 `mc insights` reads the same metrics as `mc metrics show`; both remain supported. Configure with `mc config`, inspect occasional history with `mc insights`, and use Home for next steps.
 
 Session message receipts can report `queued`: Conductor accepted the message but is waiting to deliver it, including during workspace/agent startup. Both normal and `--json` output preserve this state. It is not task completion. Use `runs inspect` for current activity and `operations show --id <requestID>` for the original submission receipt; replay never sends a queued message again. Existing CLI versions display this additive state without an upgrade.
+
+## Personal execution policy and queue options in CLI 0.18.0
+
+With a factory and project selected, run `mc policy show --json` to read your policy. To change it, put the returned revision and your edited config in `policy.json`, then run `mc policy set --file policy.json`. If the server reports a conflict or the request times out, read the policy again before saving.
+
+When creating a queue with `mc queue create`, omit both merge flags to hold PRs for final QA. To allow automatic merging after the configured handoffs, CI and independent QA pass, add `--merge-risk low` for bounded documentation changes or `--merge-risk medium` to also allow qualifying new tests. Verified risk requires API 1.26 or later. The CLI checks server support before submitting the queue.
+
+Use `mc runs attention --id RUN_UUID --json` to inspect the server's attention decision for a paired-worker run you can access.
